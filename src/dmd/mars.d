@@ -219,8 +219,14 @@ private int tryMain(size_t argc, const(char)** argv, ref Param params)
     bool is64bit = arch[0] == '6';
 
     version(Windows) // delete LIB entry in [Environment] (necessary for optlink) to allow inheriting environment for MS-COFF
+    {
         if (is64bit || strcmp(arch, "32mscoff") == 0)
-            environment.update("LIB", 3).ptrvalue = null;
+        {
+            auto libEntry = environment.update("LIB");
+            libEntry.ptrvalue = null;
+            libEntry.length = 0;
+        }
+    }
 
     // read from DFLAGS in [Environment{arch}] section
     char[80] envsection = void;
