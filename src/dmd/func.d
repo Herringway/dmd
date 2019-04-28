@@ -3462,6 +3462,11 @@ extern (C++) final class CtorDeclaration : FuncDeclaration
         return "this";
     }
 
+    extern(D) override const(char)[] toString() const
+    {
+        return "this";
+    }
+
     override bool isVirtual() const
     {
         return false;
@@ -3561,6 +3566,11 @@ extern (C++) final class DtorDeclaration : FuncDeclaration
     }
 
     override const(char)* toChars() const
+    {
+        return "~this";
+    }
+
+    extern(D) override const(char)[] toString()
     {
         return "~this";
     }
